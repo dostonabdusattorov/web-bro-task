@@ -108,12 +108,16 @@ html {
 .listCard {
   height: 100%;
   padding-bottom: 16rem;
+  font-size: 2rem;
+  color: #fff;
 }
 .listCard li {
   display: grid;
   grid-template-columns: 100px repeat(3, 1fr);
   color: #fff;
   row-gap: 10px;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
 }
 .listCard li div {
   display: flex;
@@ -126,6 +130,9 @@ html {
 .listCard li button {
   background-color: #fff5;
   border: none;
+  width: 4rem;
+  height: 2rem;
+  border-radius: 5px;
 }
 .listCard .count {
   margin: 0 10px;

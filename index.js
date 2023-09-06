@@ -4,12 +4,16 @@ const productListSpinner = document.querySelector("#productListSpinner");
 const pagination = document.querySelector("#pagination");
 const categoryList = document.querySelector("#category-list");
 const categoriesSpinner = document.querySelector("#categories-spinner");
+const cartNumber = document.querySelector("#cart-number");
+const cartList = document.querySelector("#cart-list");
 
 const limit = 20;
 let skip = 0;
 let paginationCount,
   currentPage = 1;
 let currentCategory = "all";
+
+let cartItems = [];
 
 document.querySelector("#btn-cart-open").addEventListener("click", () => {
   cart.classList.add("open");
@@ -40,6 +44,84 @@ const renderPagination = () => {
     pagination.append(pageItem);
   }
 };
+
+const renderCartNumber = () => {
+  cartNumber.innerHTML = cartItems.length;
+};
+
+const renderCartItems = () => {
+  cartList.innerHTML = "";
+  let total = 0;
+
+  if (cartItems.length === 0) {
+    cartList.innerHTML = "There is no cart items";
+  } else {
+    cartItems.forEach((item) => {
+      total += item.product.price * item.count;
+      const newItem = document.createElement("li");
+      newItem.innerHTML = `
+      <div><img src="${item.product.images[0]}"></div>
+      <div>${item.product.title}</div>
+      <div>${item.product.price.toLocaleString()}</div>
+      <div class="action-area"></div>`;
+
+      const decBtn = document.createElement("button");
+      decBtn.innerHTML = "-";
+      decBtn.addEventListener("click", updateCart(item.product, false));
+      const count = document.createElement("div");
+      count.classList.add("count");
+      count.innerHTML = item.count;
+      const incBtn = document.createElement("button");
+      incBtn.innerHTML = "+";
+      incBtn.addEventListener("click", updateCart(item.product));
+
+      newItem.querySelector(`.action-area`).append(decBtn, count, incBtn);
+
+      cartList.append(newItem);
+    });
+  }
+
+  document.querySelector("#total-price").innerHTML = total;
+};
+
+function updateCart(product, isAdding = true) {
+  return () => {
+    if (isAdding) {
+      if (cartItems.some((item) => item.product.id === product.id)) {
+        cartItems = cartItems.map((item) => {
+          if (item.product.id === product.id) {
+            return {
+              ...item,
+              count: item.count + 1,
+            };
+          }
+
+          return item;
+        });
+      } else {
+        cartItems = [...cartItems, { count: 1, product }];
+      }
+    } else {
+      if (cartItems.find((item) => item.product.id === product.id).count > 1) {
+        cartItems = cartItems.map((item) => {
+          if (item.product.id === product.id) {
+            return {
+              ...item,
+              count: item.count - 1,
+            };
+          }
+
+          return item;
+        });
+      } else {
+        cartItems = cartItems.filter((item) => item.product.id !== product.id);
+      }
+    }
+
+    renderCartNumber();
+    renderCartItems();
+  };
+}
 
 const renderProducts = async (isCategoryFiltered = false) => {
   productListSpinner.classList.add("d-flex");
@@ -84,12 +166,15 @@ const renderProducts = async (isCategoryFiltered = false) => {
           <p class="card-text">
             ${product.description}
           </p>
-          <div class="d-flex justify-content-between">
-            <button class="btn btn-warning disabled">$${product.price}</button>
-            <button id="${product.id}" class="btn btn-primary">Add to Cart</button>
-          </div>
+          <button class="btn btn-warning disabled">$${product.price}</button>
         </div>
       </div>`;
+
+    const addToCartBtn = document.createElement("button");
+    addToCartBtn.addEventListener("click", updateCart(product));
+    addToCartBtn.classList.add("btn", "btn-primary");
+    addToCartBtn.innerHTML = "Add To Cart";
+    productItem.querySelector(".card-body").append(addToCartBtn);
 
     productList.append(productItem);
   });
@@ -133,6 +218,8 @@ const renderCategories = async () => {
 const init = () => {
   renderProducts();
   renderCategories();
+  renderCartNumber();
+  renderCartItems();
 };
 
 init();
