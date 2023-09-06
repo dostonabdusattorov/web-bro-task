@@ -39,6 +39,10 @@ html {
   width: 25rem;
 }
 
+.card img {
+  height: 15rem;
+}
+
 .card-text {
   font-size: 1.5rem;
 }
@@ -48,6 +52,11 @@ html {
   bottom: 0;
   left: 50%;
   margin-top: 2rem;
+}
+
+.pagination li a {
+  cursor: pointer;
+  font-size: 1.6rem;
 }
 
 .cart {
