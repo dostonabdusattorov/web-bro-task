@@ -14,3 +14,18 @@ html {
   border-radius: 50%;
   font-size: 1.4rem;
 }
+
+.categories {
+  width: 20%;
+  height: 92.35vh;
+}
+
+.main {
+  width: 80%;
+  height: 92.35vh;
+  right: 0;
+}
+
+.category-item {
+  font-size: 2rem;
+}

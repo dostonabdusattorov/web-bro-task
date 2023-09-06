@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="./index.css" />
   </head>
-  <body>
+  <body class="position-relative">
     <header class="top-header py-3 sticky-top bg-dark">
       <div
         class="container text-light d-flex justify-content-between align-items-center"
@@ -32,11 +32,36 @@
         <button
           class="cart btn btn-primary px-4 d-flex justify-content-between align-items-center gap-3"
         >
+          <div class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
           <i class="bi bi-cart-fill h2 text-light"></i>
           <span class="bg-danger" id="cart-number">0</span>
         </button>
       </div>
     </header>
+
+    <aside
+      class="categories position-absolute left-0 sticky-left bg-light overflow-y-scroll"
+    >
+      <h2 class="text-center py-3">Categories</h2>
+      <div class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <ul id="category-list" class="list-group list-group-flush bg-light">
+        <li class="category-item list-group-item active">shirts</li>
+        <li class="category-item list-group-item bg-light">shirts</li>
+        <li class="category-item list-group-item bg-light">shirts</li>
+      </ul>
+    </aside>
+
+    <main class="main position-absolute overflow-y-scroll">
+      <div class="container"></div>
+    </main>
 
     <script src="./index.js"></script>
   </body>
