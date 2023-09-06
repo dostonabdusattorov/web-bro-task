@@ -60,7 +60,46 @@
     </aside>
 
     <main class="main position-absolute overflow-y-scroll">
-      <div class="container"></div>
+      <div class="container">
+        <ul class="product-list d-flex flex-wrap gap-5 m-3">
+          <li class="product-item m-3">
+            <div class="card">
+              <img
+                src="https://i.dummyjson.com/data/products/1/1.jpg"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h2 class="card-title">Card title</h2>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-warning disabled">$15.55</button>
+                  <button class="btn btn-primary">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <nav aria-label="...">
+          <ul class="pagination">
+            <li class="page-item disabled">
+              <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </main>
 
     <script src="./index.js"></script>

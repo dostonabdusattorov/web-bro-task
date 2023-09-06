@@ -29,3 +29,15 @@ html {
 .category-item {
   font-size: 2rem;
 }
+
+.product-list {
+  list-style: none;
+}
+
+.card {
+  width: 25rem;
+}
+
+.card-text {
+  font-size: 1.5rem;
+}
