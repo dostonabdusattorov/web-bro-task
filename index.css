@@ -32,6 +32,7 @@ html {
 
 .product-list {
   list-style: none;
+  margin: 4rem 0 10rem 0;
 }
 
 .card {
@@ -40,4 +41,83 @@ html {
 
 .card-text {
   font-size: 1.5rem;
+}
+
+.pagination {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  margin-top: 2rem;
+}
+
+.cart {
+  width: 50rem;
+  height: 100vh;
+  background-color: #453e3b;
+  top: 0;
+  right: -50rem;
+  z-index: 99999;
+  transition: 1s;
+}
+
+.cart.open {
+  right: 0;
+}
+
+.cart h1 {
+  color: #e8bc0e;
+  font-weight: 100;
+  margin: 0;
+  padding: 0 20px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.cart .checkOut {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(1fr);
+}
+.cart .checkOut div {
+  background-color: #e8bc0e;
+  font-size: 2rem;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+.cart .checkOut div:nth-child(2) {
+  background-color: #1c1f25;
+  color: #fff;
+}
+.listCard {
+  height: 100%;
+  padding-bottom: 16rem;
+}
+.listCard li {
+  display: grid;
+  grid-template-columns: 100px repeat(3, 1fr);
+  color: #fff;
+  row-gap: 10px;
+}
+.listCard li div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.listCard li img {
+  width: 90%;
+}
+.listCard li button {
+  background-color: #fff5;
+  border: none;
+}
+.listCard .count {
+  margin: 0 10px;
 }
