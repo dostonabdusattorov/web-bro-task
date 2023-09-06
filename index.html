@@ -46,21 +46,17 @@
       class="categories position-absolute left-0 sticky-left bg-light overflow-y-scroll"
     >
       <h2 class="text-center py-3">Categories</h2>
-      <div class="text-center">
+      <div id="categories-spinner" class="text-center">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
-      <ul id="category-list" class="list-group list-group-flush bg-light">
-        <li class="category-item list-group-item active">shirts</li>
-        <li class="category-item list-group-item bg-light">shirts</li>
-        <li class="category-item list-group-item bg-light">shirts</li>
-      </ul>
+      <ul id="category-list" class="list-group list-group-flush bg-light"></ul>
     </aside>
 
     <main class="main position-absolute overflow-y-scroll">
       <div class="container">
-        <div id="spinner" class="d-flex justify-content-center mt-5">
+        <div id="productListSpinner" class="d-flex justify-content-center mt-5">
           <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>

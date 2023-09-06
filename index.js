@@ -1,12 +1,15 @@
 const cart = document.querySelector("#cart");
 const productList = document.querySelector("#product-list");
-const spinner = document.querySelector("#spinner");
+const productListSpinner = document.querySelector("#productListSpinner");
 const pagination = document.querySelector("#pagination");
+const categoryList = document.querySelector("#category-list");
+const categoriesSpinner = document.querySelector("#categories-spinner");
 
 const limit = 20;
 let skip = 0;
 let paginationCount,
   currentPage = 1;
+let currentCategory = "all";
 
 document.querySelector("#btn-cart-open").addEventListener("click", () => {
   cart.classList.add("open");
@@ -38,19 +41,31 @@ const renderPagination = () => {
   }
 };
 
-const renderProducts = async () => {
-  spinner.classList.add("d-flex");
-  spinner.classList.remove("d-none");
+const renderProducts = async (isCategoryFiltered = false) => {
+  productListSpinner.classList.add("d-flex");
+  productListSpinner.classList.remove("d-none");
+  pagination.classList.add("d-none");
+  pagination.classList.remove("d-flex");
+  productList.classList.add("d-none");
+  productList.classList.remove("d-flex");
 
-  const productsResponse = await fetch(getRequestUrl("products", skip));
+  const productsResponse = await fetch(
+    isCategoryFiltered
+      ? `https://dummyjson.com/products/category/${currentCategory}`
+      : getRequestUrl("products", skip)
+  );
   const { products, total } = await productsResponse.json();
 
-  spinner.classList.add("d-none");
-  spinner.classList.remove("d-flex");
+  productListSpinner.classList.add("d-none");
+  productListSpinner.classList.remove("d-flex");
+  pagination.classList.remove("d-none");
+  pagination.classList.add("d-flex");
+  productList.classList.remove("d-none");
+  productList.classList.add("d-flex");
 
   paginationCount = Math.ceil(total / 20);
 
-  renderPagination();
+  !isCategoryFiltered ? renderPagination() : (pagination.innerHTML = "");
 
   productList.innerHTML = "";
 
@@ -80,9 +95,44 @@ const renderProducts = async () => {
   });
 };
 
+const renderCategoriesContent = (categories) => {
+  categoryList.innerHTML = "";
+  categories.forEach((category) => {
+    const categoryItem = document.createElement("li");
+    categoryItem.classList.add(
+      "category-item",
+      "list-group-item",
+      `${category === currentCategory ? "active" : "bg-light"}`
+    );
+    categoryItem.innerHTML = category;
+    categoryItem.addEventListener("click", () => {
+      currentCategory = category;
+      renderProducts(currentCategory !== "all");
+      renderCategoriesContent(categories);
+    });
+    categoryList.append(categoryItem);
+  });
+};
+
+const renderCategories = async () => {
+  categoriesSpinner.classList.remove("d-none");
+  categoryList.classList.add("d-none");
+
+  const categoriesResponse = await fetch(
+    "https://dummyjson.com/products/categories"
+  );
+  let categories = await categoriesResponse.json();
+  categories = ["all", ...categories];
+
+  categoriesSpinner.classList.add("d-none");
+  categoryList.classList.remove("d-none");
+
+  renderCategoriesContent(categories);
+};
+
 const init = () => {
   renderProducts();
-  renderPagination();
+  renderCategories();
 };
 
 init();

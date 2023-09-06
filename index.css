@@ -15,18 +15,18 @@ html {
   font-size: 1.4rem;
 }
 
-.categories {
-  width: 20%;
-  height: 92.35vh;
-}
-
 .main {
   width: 80%;
   height: 92.35vh;
   right: 0;
 }
+.categories {
+  width: 20%;
+  height: 92.35vh;
+}
 
 .category-item {
+  cursor: pointer;
   font-size: 2rem;
 }
 
