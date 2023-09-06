@@ -81,7 +81,7 @@ const renderCartItems = () => {
     });
   }
 
-  document.querySelector("#total-price").innerHTML = total;
+  document.querySelector("#total-price").innerHTML = `$${total}`;
 };
 
 function updateCart(product, isAdding = true) {
